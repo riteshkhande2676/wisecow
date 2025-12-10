@@ -19,6 +19,9 @@ spec:
         - name: wisecow
           image: ghcr.io/nyrahul/wisecow:latest
           imagePullPolicy: Always
+          # Required if your GHCR package is private
+          # imagePullSecrets:
+          #   - name: regcred
           ports:
             - containerPort: 4499
           readinessProbe:

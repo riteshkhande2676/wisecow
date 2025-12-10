@@ -7,7 +7,10 @@ metadata:
     app: wisecow
   annotations:
     kubernetes.io/ingress.class: nginx
-    cert-manager.io/cluster-issuer: letsencrypt-staging
+    # For production/staging with Let's Encrypt:
+    # cert-manager.io/cluster-issuer: letsencrypt-staging
+    # For local development with self-signed certs:
+    cert-manager.io/cluster-issuer: selfsigned-issuer
 spec:
   tls:
     - hosts:
