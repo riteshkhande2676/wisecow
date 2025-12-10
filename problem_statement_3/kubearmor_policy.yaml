@@ -1,0 +1,28 @@
+apiVersion: security.kubearmor.com/v1
+kind: KubeArmorPolicy
+metadata:
+  name: ksp-wisecow-audit
+  namespace: wisecow
+spec:
+  selector:
+    matchLabels:
+      app: wisecow
+  process:
+    matchPaths:
+      # Block sensitive file readers not needed by the app
+      - path: /usr/bin/cat
+      - path: /usr/bin/head
+      - path: /usr/bin/tail
+    matchDirectories:
+      - dir: /bin/
+      - dir: /usr/bin/
+      - dir: /sbin/
+      - dir: /usr/sbin/
+  file:
+    matchPaths:
+      # Audit access to sensitive files
+      - path: /etc/shadow
+      - path: /etc/passwd
+      - path: /etc/ssl/certs/
+    action: Audit
+  action: POSTRES_AUDIT # Log events rather than blocking everything immediately (safer for first deployment)
