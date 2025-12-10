@@ -18,7 +18,7 @@ kubectl create secret docker-registry regcred \
   --docker-password=$TOKEN \
   --docker-email=$USER@users.noreply.github.com \
   -n wisecow \
-  --dry-run=client -o yaml > k8s/regcred.yaml
+  --dry-run=client -o yaml > problem_statement_1/k8s/regcred.yaml
 
-echo "Created k8s/regcred.yaml"
-echo "You can apply it with: kubectl apply -f k8s/regcred.yaml"
+echo "Created problem_statement_1/k8s/regcred.yaml"
+echo "You can apply it with: kubectl apply -f problem_statement_1/k8s/regcred.yaml"
