@@ -39,7 +39,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: problem_statement_1
+          context: wisecow
           push: true
           tags: |
             ${{ env.IMAGE_NAME }}:latest
@@ -66,17 +66,17 @@ jobs:
 
       - name: Create namespace (idempotent)
         run: |
-          kubectl apply -f problem_statement_1/k8s/namespace.yaml
+          kubectl apply -f wisecow/k8s/namespace.yaml
 
       - name: Apply ClusterIssuer (TLS)
         run: |
-          kubectl apply -f problem_statement_1/k8s/clusterissuer.yaml
+          kubectl apply -f wisecow/k8s/clusterissuer.yaml
 
       - name: Apply app manifests
         run: |
-          kubectl -n ${{ env.KUBE_NAMESPACE }} apply -f problem_statement_1/k8s/deployment.yaml
-          kubectl -n ${{ env.KUBE_NAMESPACE }} apply -f problem_statement_1/k8s/service.yaml
-          kubectl -n ${{ env.KUBE_NAMESPACE }} apply -f problem_statement_1/k8s/ingress.yaml
+          kubectl -n ${{ env.KUBE_NAMESPACE }} apply -f wisecow/k8s/deployment.yaml
+          kubectl -n ${{ env.KUBE_NAMESPACE }} apply -f wisecow/k8s/service.yaml
+          kubectl -n ${{ env.KUBE_NAMESPACE }} apply -f wisecow/k8s/ingress.yaml
 
       - name: Update image to latest SHA
         run: |
